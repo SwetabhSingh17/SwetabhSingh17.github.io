@@ -1,4 +1,4 @@
-# Swetabh Singh — Portfolio
+# Swetabh Singh - Portfolio
 
 A bold, minimalist portfolio website built with **React + Vite**, featuring a clean editorial design with light/dark theme switching, smooth scroll animations, a floating bottom navigation pill, and responsive layouts.
 
