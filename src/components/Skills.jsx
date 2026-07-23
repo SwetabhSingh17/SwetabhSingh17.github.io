@@ -4,46 +4,49 @@ const skillCategories = [
   {
     title: 'AI/ML & Data',
     icon: '🤖',
-    skills: ['Generative AI', 'Gemini API', 'Vertex AI', 'Apache Spark', 'Dataflow', 'NLP APIs']
+    skills: ['Generative AI', 'Gemini API', 'Vertex AI', 'Apache Spark', 'Dataflow', 'NLP APIs'],
   },
   {
     title: 'Development',
     icon: '🌐',
-    skills: ['TypeScript', 'JavaScript', 'Python', 'Swift', 'React', 'Node.js', 'Streamlit', 'HTML/CSS']
+    skills: ['TypeScript', 'JavaScript', 'Python', 'Swift', 'React', 'Node.js', 'Streamlit', 'HTML/CSS'],
   },
   {
-    title: 'OS & Device Engineering',
+    title: 'OS & Device Eng.',
     icon: '📱',
-    skills: ['OS Internals', 'Device Debugging', 'Android', 'Performance Tuning', 'Custom ROMs', 'QA Testing']
+    skills: ['OS Internals', 'Device Debugging', 'Android', 'Performance Tuning', 'Custom ROMs', 'QA Testing'],
   },
   {
     title: 'Tools & Platforms',
     icon: '🛠️',
-    skills: ['Google Cloud', 'Git', 'Linux', 'PostgreSQL', 'Docker']
-  }
+    skills: ['Google Cloud', 'Git', 'Linux', 'PostgreSQL', 'Docker'],
+  },
 ];
 
 export default function Skills() {
   return (
-    <section className="skills" id="skills">
-      <div className="container">
-        <div className="section-label reveal">Expertise</div>
-        <div className="section-title reveal">Skills & Technologies</div>
-        <div className="section-subtitle reveal">
-          From Generative AI to OS internals — the tools I use to build, optimize, and innovate.
-        </div>
+    <section className="skills-section" id="skills" aria-label="Skills">
+      <div className="container px-3">
 
-        <div className="skills-categories">
+        <div className="mac-section-label reveal">Expertise</div>
+        <h2 className="mac-section-title reveal">Skills &amp; Technologies</h2>
+        <p className="mac-section-subtitle reveal">
+          From Generative AI to OS internals — the tools I use to build, optimize, and innovate.
+        </p>
+
+        <div className="row g-4">
           {skillCategories.map((cat, ci) => (
-            <div className="skills-category reveal" key={ci}>
-              <div className="category-header">
-                <span className="category-icon">{cat.icon}</span>
-                <h3 className="category-name">{cat.title}</h3>
-              </div>
-              <div className="skills-tags">
-                {cat.skills.map((skill, si) => (
-                  <span className="skill-tag" key={si}>{skill}</span>
-                ))}
+            <div className="col-sm-6 col-xl-3 reveal" key={ci}>
+              <div className="skills-cat-card">
+                <div className="skills-cat-bar">
+                  <span className="skills-cat-icon" aria-hidden="true">{cat.icon}</span>
+                  <h3 className="skills-cat-title">{cat.title}</h3>
+                </div>
+                <div className="skills-cat-body">
+                  {cat.skills.map((skill, si) => (
+                    <span className="skill-tag" key={si}>{skill}</span>
+                  ))}
+                </div>
               </div>
             </div>
           ))}

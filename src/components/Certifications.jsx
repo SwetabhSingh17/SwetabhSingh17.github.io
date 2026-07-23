@@ -4,6 +4,7 @@ import '../styles/Certifications.css';
 const certGroups = [
   {
     issuer: 'Google Cloud Skills Boost',
+    icon: '📂',
     certs: [
       {
         title: 'Inspect Rich Documents with Gemini Multimodality and Multimodal RAG',
@@ -40,74 +41,100 @@ const certGroups = [
         date: '2024',
         skills: ['Natural Language API', 'Vision API', 'Translation API'],
       },
-    ]
+    ],
   },
   {
     issuer: 'IBM SkillsBuild',
+    icon: '📂',
     certs: [
       {
         title: 'Artificial Intelligence Fundamentals',
         date: '2024',
         skills: ['AI Fundamentals', 'Machine Learning', 'Neural Networks', 'NLP'],
       },
-    ]
-  }
+    ],
+  },
 ];
 
+const ArrowIcon = () => (
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="7" y1="17" x2="17" y2="7"/>
+    <polyline points="7 7 17 7 17 17"/>
+  </svg>
+);
+
 export default function Certifications() {
-  const [expandedGroup, setExpandedGroup] = useState(0);
+  const [expanded, setExpanded] = useState(0);
+
+  const toggle = (i) => setExpanded(expanded === i ? -1 : i);
 
   return (
-    <section className="certifications" id="certifications">
-      <div className="container">
-        <div className="section-label reveal">Credentials</div>
-        <div className="section-title reveal">Certifications & Courses</div>
-        <div className="section-subtitle reveal">
-          Verified credentials from Google Cloud and IBM, showcasing continuous learning and professional growth.
-        </div>
+    <section className="certs-section" id="certifications" aria-label="Certifications">
+      <div className="container px-3">
 
-        <div className="certs-groups">
+        <div className="mac-section-label reveal">Credentials</div>
+        <h2 className="mac-section-title reveal">Certifications &amp; Courses</h2>
+        <p className="mac-section-subtitle reveal">
+          Verified credentials from Google Cloud and IBM, showcasing continuous learning and professional growth.
+        </p>
+
+        <div className="reveal">
           {certGroups.map((group, gi) => (
-            <div className="cert-group reveal" key={gi}>
+            <div className="cert-group" key={gi}>
+
+              {/* Folder header row */}
               <button
-                className={`cert-group-header ${expandedGroup === gi ? 'expanded' : ''}`}
-                onClick={() => setExpandedGroup(expandedGroup === gi ? -1 : gi)}
+                className={`cert-group-header ${expanded === gi ? 'expanded' : ''}`}
+                onClick={() => toggle(gi)}
+                aria-expanded={expanded === gi}
+                aria-controls={`cert-body-${gi}`}
               >
-                <div className="cert-group-info">
-                  <h3 className="cert-group-name">{group.issuer}</h3>
-                  <span className="cert-group-count">{group.certs.length} certification{group.certs.length > 1 ? 's' : ''}</span>
+                <div className="cert-folder-tab" aria-hidden="true">
+                  {group.icon}
                 </div>
-                <div className="cert-group-toggle">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19" className="vert-line" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
+                <div className="cert-group-info">
+                  <div className="cert-group-name">{group.issuer}</div>
+                  <div className="cert-group-count">
+                    {group.certs.length} certification{group.certs.length > 1 ? 's' : ''}
+                  </div>
+                </div>
+                <div className="cert-group-arrow" aria-hidden="true">
+                  {expanded === gi ? '▲' : '▼'}
                 </div>
               </button>
 
-              <div className={`cert-group-body ${expandedGroup === gi ? 'expanded' : ''}`}>
+              {/* File list body */}
+              <div
+                id={`cert-body-${gi}`}
+                className={`cert-group-body ${expanded === gi ? 'expanded' : ''}`}
+                role="region"
+                aria-label={group.issuer}
+              >
                 {group.certs.map((cert, ci) => (
                   <div className="cert-item" key={ci}>
                     <div className="cert-item-header">
                       <h4 className="cert-item-title">{cert.title}</h4>
                       <span className="cert-item-date">{cert.date}</span>
                     </div>
-                    <div className="cert-item-skills">
+                    <div className="cert-skill-tags">
                       {cert.skills.map((skill, si) => (
                         <span className="cert-skill-tag" key={si}>{skill}</span>
                       ))}
                     </div>
                   </div>
                 ))}
-                <a
-                  href="https://www.credly.com/users/swetabhsingh/badges"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="cert-verify-link"
-                >
-                  Verify on Credly
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                </a>
+
+                {/* Credly verify link */}
+                <div className="cert-verify-row">
+                  <a
+                    href="https://www.credly.com/users/swetabhsingh/badges"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="cert-verify-link"
+                  >
+                    Verify on Credly <ArrowIcon />
+                  </a>
+                </div>
               </div>
             </div>
           ))}

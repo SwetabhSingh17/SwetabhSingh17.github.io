@@ -43,7 +43,6 @@ export default function App() {
       { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     );
 
-    // Use a timeout to ensure DOM is fully rendered
     const timer = setTimeout(() => {
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }, 100);
@@ -56,16 +55,18 @@ export default function App() {
 
   return (
     <>
-      {/* Dot grid background */}
-      <div className="dot-grid" />
+      {/* Mac desktop grid background */}
+      <div className="mac-desktop" aria-hidden="true" />
 
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Certifications />
-      <Contact />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Certifications />
+        <Contact />
+      </main>
     </>
   );
 }

@@ -1,151 +1,191 @@
-/* ===== PROJECTS SECTION ===== */
-.projects {
-  position: relative;
-}
+/* ============================================================
+   PROJECTS.CSS — Mac Finder Window Style Cards
+   ============================================================ */
 
-.projects-bg-block {
+.projects-section {
+  padding: 80px 0;
   background: var(--bg-secondary);
-  padding: var(--section-padding);
-  transition: background-color 0.4s var(--ease-smooth);
+  border-bottom: var(--border);
 }
 
-.projects-list {
+/* ===== FINDER WINDOW CARD ===== */
+.project-window {
+  border: var(--border);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-mac-sm);
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  transition: all var(--transition-fast);
 }
 
-.project-entry {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 32px;
-  padding: 40px 0;
-  border-bottom: 1px solid var(--border);
-  transition: all var(--transition-normal);
-  align-items: start;
+.project-window:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-mac-lg);
 }
 
-.project-entry:first-child {
-  border-top: 1px solid var(--border);
+/* Title bar */
+.project-window-bar {
+  background: var(--mac-window-bar);
+  border-bottom: var(--border);
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  justify-content: space-between;
+  flex-shrink: 0;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 1px,
+    rgba(255,255,255,0.07) 1px, rgba(255,255,255,0.07) 2px
+  );
 }
 
-.project-entry:hover {
-  padding-left: 12px;
+[data-theme="dark"] .project-window-bar {
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 1px,
+    rgba(0,0,0,0.1) 1px, rgba(0,0,0,0.1) 2px
+  );
 }
 
-.project-number {
+.project-window-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.project-window-dot {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--mac-window-bar-text);
+  opacity: 0.7;
+}
+
+.project-window-title {
   font-family: var(--font-mono);
-  font-size: 2.5rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent);
-  opacity: 0.4;
+  letter-spacing: 0.04em;
+  color: var(--mac-window-bar-text);
+  text-align: center;
+  flex: 1;
+  padding: 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Toolbar strip below title bar */
+.project-window-toolbar {
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.project-num {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
   line-height: 1;
-  padding-top: 4px;
-  transition: opacity var(--transition-normal);
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
 }
 
-.project-entry:hover .project-number {
-  opacity: 1;
+.project-type-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-secondary);
+  background: var(--bg-card);
 }
 
-.project-info {
+/* Window content */
+.project-window-body {
+  padding: 18px 20px 20px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
-.project-meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+.project-title {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  line-height: 1.4;
 }
 
-.project-type {
-  display: inline-flex;
-  align-items: center;
-  padding: 5px 14px;
-  border-radius: 8px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background: var(--accent-dim);
-  color: var(--accent);
-  border: 1px solid var(--accent-border);
+.project-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  flex: 1;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-bottom: 18px;
 }
 
 .project-tag {
-  padding: 4px 12px;
-  border-radius: 8px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-}
-
-.project-title {
-  font-size: 1.4rem;
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
   font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-  line-height: 1.3;
-}
-
-.project-desc {
-  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-light);
   color: var(--text-muted);
-  line-height: 1.7;
-  max-width: 680px;
+  background: var(--bg-secondary);
 }
 
-.project-links {
+/* Status bar at bottom */
+.project-window-statusbar {
+  border-top: var(--border-thin);
+  padding: 8px 20px;
   display: flex;
-  gap: 16px;
-  margin-top: 4px;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-secondary);
+  flex-shrink: 0;
 }
 
 .project-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1.5px solid transparent;
   transition: all var(--transition-fast);
+  padding-bottom: 1px;
 }
 
 .project-link:hover {
-  color: var(--accent);
-}
-
-.project-link svg {
-  transition: transform var(--transition-fast);
-}
-
-.project-link:hover svg {
-  transform: translate(2px, -2px);
+  color: var(--text-primary);
+  border-bottom-color: var(--border-color);
 }
 
 @media (max-width: 768px) {
-  .project-entry {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 28px 0;
-  }
-
-  .project-number {
-    font-size: 1.8rem;
-  }
-
-  .project-title {
-    font-size: 1.2rem;
+  .projects-section {
+    padding: 60px 0;
   }
 }

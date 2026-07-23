@@ -31,58 +31,98 @@ const projects = [
   {
     num: '04',
     title: 'Portfolio Website',
-    desc: 'A stunning portfolio website built with React and Vite, featuring smooth scroll animations, theme switching, and a bold minimalist design language inspired by modern editorial aesthetics.',
-    tags: ['React', 'Vite', 'CSS3', 'Responsive Design'],
+    desc: 'A portfolio website built with React and Vite, featuring a macOS System 1 inspired theme, Bootstrap 5 layout, dual dark/light modes, and smooth scroll animations.',
+    tags: ['React', 'Vite', 'Bootstrap 5', 'CSS3'],
     type: 'Web Design',
     github: 'https://github.com/SwetabhSingh17',
     live: '#',
   },
 ];
 
+const ArrowIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="7" y1="17" x2="17" y2="7"/>
+    <polyline points="7 7 17 7 17 17"/>
+  </svg>
+);
+
 export default function Projects() {
   return (
-    <section className="projects" id="projects">
-      <div className="projects-bg-block">
-        <div className="container">
-          <div className="section-label reveal">Work</div>
-          <div className="section-title reveal">Featured Projects</div>
-          <div className="section-subtitle reveal">
-            A showcase of my work — from full-stack applications to native Apple ecosystem apps.
-          </div>
+    <section className="projects-section" id="projects" aria-label="Projects">
+      <div className="container px-3">
 
-          <div className="projects-list">
-            {projects.map((project, i) => (
-              <div className="project-entry reveal" key={i}>
-                <div className="project-number">{project.num}</div>
-                <div className="project-info">
-                  <div className="project-meta">
-                    <span className="project-type">{project.type}</span>
-                    <div className="project-tags">
-                      {project.tags.map((tag, ti) => (
-                        <span className="project-tag" key={ti}>{tag}</span>
-                      ))}
-                    </div>
+        <div className="mac-section-label reveal">Work</div>
+        <h2 className="mac-section-title reveal">Featured Projects</h2>
+        <p className="mac-section-subtitle reveal">
+          A showcase of my work — from full-stack applications to native Apple ecosystem apps.
+        </p>
+
+        <div className="row g-4">
+          {projects.map((project, i) => (
+            <div className="col-md-6 reveal" key={i}>
+              <article className="project-window">
+
+                {/* Finder title bar */}
+                <div className="project-window-bar">
+                  <div className="project-window-dots" aria-hidden="true">
+                    <span className="project-window-dot" />
+                    <span className="project-window-dot" />
+                    <span className="project-window-dot" />
                   </div>
+                  <span className="project-window-title">
+                    project_{project.num}.app
+                  </span>
+                  <span style={{ width: 40 }} />
+                </div>
+
+                {/* Toolbar */}
+                <div className="project-window-toolbar">
+                  <span className="project-num" aria-hidden="true">{project.num}</span>
+                  <span className="project-type-badge">{project.type}</span>
+                </div>
+
+                {/* Body */}
+                <div className="project-window-body">
                   <h3 className="project-title">{project.title}</h3>
                   <p className="project-desc">{project.desc}</p>
-                  <div className="project-links">
-                    {project.github && (
-                      <a href={project.github} target="_blank" rel="noreferrer" className="project-link">
-                        Source Code
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                      </a>
-                    )}
-                    {project.live && (
-                      <a href={project.live} target="_blank" rel="noreferrer" className="project-link">
-                        Live Demo
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                      </a>
-                    )}
+                  <div className="project-tags">
+                    {project.tags.map((tag, ti) => (
+                      <span className="project-tag" key={ti}>{tag}</span>
+                    ))}
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+
+                {/* Status bar / links */}
+                <div className="project-window-statusbar">
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-link"
+                    >
+                      Source Code <ArrowIcon />
+                    </a>
+                  )}
+                  {project.live && project.live !== '#' && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-link"
+                    >
+                      Live Demo <ArrowIcon />
+                    </a>
+                  )}
+                  {project.live === '#' && (
+                    <span className="project-link" style={{ opacity: 0.5, cursor: 'default' }}>
+                      Live Site <ArrowIcon />
+                    </span>
+                  )}
+                </div>
+              </article>
+            </div>
+          ))}
         </div>
       </div>
     </section>
