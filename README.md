@@ -6,13 +6,13 @@ A bold, minimalist portfolio website built with **React + Vite**, featuring a cl
 
 ## ✨ Features
 
-- **Light/Dark Theme** — Toggle with system preference detection and persistent localStorage
-- **Floating Bottom Nav** — Desktop pill navigation bar with auto-hide on scroll
-- **Scroll Reveal Animations** — Sections animate in as you scroll using Intersection Observer
-- **Editorial Design** — Large typography, generous whitespace, subtle dot-grid background
-- **Accordion Certifications** — Grouped by issuer with expand/collapse
-- **Numbered Projects** — Full-width editorial project entries
-- **Responsive** — Mobile-first with bottom-sheet nav and adaptive layouts
+- **Light/Dark Theme** - Toggle with system preference detection and persistent localStorage
+- **Floating Bottom Nav** - Desktop pill navigation bar with auto-hide on scroll
+- **Scroll Reveal Animations** - Sections animate in as you scroll using Intersection Observer
+- **Editorial Design** - Large typography, generous whitespace, subtle dot-grid background
+- **Accordion Certifications** - Grouped by issuer with expand/collapse
+- **Numbered Projects** - Full-width editorial project entries
+- **Responsive** - Mobile-first with bottom-sheet nav and adaptive layouts
 
 ---
 
