@@ -74,7 +74,7 @@ export default function Hero() {
         {/* Stats bar docked below window */}
         <div className="hero-stats-bar" aria-label="Quick stats">
           <div className="hero-stat-item">
-            <div className="hero-stat-number">3+</div>
+            <div className="hero-stat-number">6+</div>
             <div className="hero-stat-label">Projects</div>
           </div>
           <div className="hero-stat-item">

@@ -3,46 +3,70 @@ import '../styles/Projects.css';
 const projects = [
   {
     num: '01',
-    title: 'APMS — Academic Project Management System',
-    desc: 'A comprehensive academic project management system built with TypeScript, enabling students and faculty to efficiently manage, track, and collaborate on academic projects with role-based access control.',
-    tags: ['TypeScript', 'React', 'Node.js', 'PostgreSQL', 'Prisma'],
+    title: 'Integral Project Hub (APMS — Academic Project Management System)',
+    desc: 'Production-grade Academic Project Management System streamlining thesis proposals, mentor evaluations, and course-segregated team allocations. Engineered with multi-sheet Excel bulk onboarding, real-time Server-Sent Events (SSE) telemetry, RBAC, and first-login security enforcement. Deployed across campus at Integral University, Lucknow.',
+    tags: ['React 18', 'TypeScript', 'Node.js', 'Express', 'PostgreSQL', 'Drizzle ORM', 'ExcelJS', 'SSE'],
     type: 'Full Stack',
+    deployment: 'Deployed @ Integral Univ',
     github: 'https://github.com/SwetabhSingh17/APMS',
     live: null,
   },
   {
     num: '02',
-    title: 'Integral Hackathon Dashboard',
-    desc: 'Full-stack hackathon management dashboard developed for Binary Battalion. Features Role-Based Access Control, JWT authentication, and a dark glassmorphism UI.',
-    tags: ['React', 'Express', 'PostgreSQL', 'TypeScript'],
-    type: 'Full Stack',
-    github: 'https://github.com/SwetabhSingh17/BB_Hackathon_Dashboard',
+    title: 'Healing Mind — Clinic Appointment App',
+    desc: 'Production-grade, offline-first Android application architected for clinical receptionists to streamline patient queues, dynamic token allocation, and priority triage. Implemented using MVVM, StateFlow, Room database persistence, and Dagger Hilt with a custom Glass Contrast Material 3 UI. Deployed in clinical practice at Healing Mind Neuro-Psychiatry Clinic, Unnao.',
+    tags: ['Kotlin', 'Jetpack Compose', 'Material 3', 'Room DB', 'Dagger Hilt', 'MVVM', 'StateFlow'],
+    type: 'Android / Mobile',
+    deployment: 'Live @ Healing Mind Clinic',
+    github: 'https://github.com/SwetabhSingh17/Clinic-Appointment-Management-App',
     live: null,
   },
   {
     num: '03',
-    title: 'Anima — Calendar App for Apple Ecosystem',
-    desc: 'A beautifully designed calendar application built natively for the Apple ecosystem (iOS, iPadOS, macOS). Features an intuitive 3-panel UI, seamless sync, and refined interactions.',
-    tags: ['Swift', 'SwiftUI', 'iOS', 'iPadOS', 'macOS', 'CloudKit'],
-    type: 'In Progress',
+    title: 'AI Skill Platform for Official Statistics',
+    desc: 'AI-powered skill intelligence and capacity-building platform engineered for Smart India Hackathon 2026 (Problem Statement 26101, MoSPI / DIID). Features automated MCQ quiz generation from unstructured PDF courseware, role-based competency gap analysis, and tailored training recommendations via iGOT Karmayogi integration.',
+    tags: ['TypeScript', 'React 18', 'Express', 'PostgreSQL', 'Drizzle ORM', 'LLM / GenAI', 'pdf-parse'],
+    type: 'AI / Full Stack',
+    deployment: 'SIH 2026 Prototype',
     github: 'https://github.com/SwetabhSingh17',
     live: null,
   },
   {
     num: '04',
-    title: 'Portfolio Website',
-    desc: 'A portfolio website built with React and Vite, featuring a macOS System 1 inspired theme, Bootstrap 5 layout, dual dark/light modes, and smooth scroll animations.',
-    tags: ['React', 'Vite', 'Bootstrap 5', 'CSS3'],
-    type: 'Web Design',
+    title: 'Academic Stress & Mood Calculator',
+    desc: 'Multimodal AI diagnostic system evaluating student stress by fusing three asynchronous telemetry channels: real-time 7-class facial emotion classification (DeepFace CNN), academic transcript PDF parsing, and Likert mood survey scoring into a calibrated 0–100 composite stress index with actionable guidance.',
+    tags: ['Python', 'TensorFlow', 'DeepFace CNN', 'Flask', 'OpenCV', 'Tailwind CSS'],
+    type: 'AI / Deep Learning',
+    deployment: 'Dept. of CA Project',
+    github: 'https://github.com/SwetabhSingh17/Academic-Stress-Calculator',
+    live: null,
+  },
+  {
+    num: '05',
+    title: 'Madhur Vedic Vision',
+    desc: 'Client-commissioned Vedic astrology and Kundli consulting web application built for astrologer Madhur Kumria. Features a BMW M-inspired aesthetic with tricolor accents, frosted glassmorphism architecture, 60fps scroll-triggered micro-interactions (IntersectionObserver), and integrated UPI checkout booking.',
+    tags: ['HTML5', 'Tailwind CSS', 'Vite', 'JavaScript', 'Glassmorphism', 'Responsive UI'],
+    type: 'Web / Frontend',
+    deployment: 'Client Site',
+    github: 'https://github.com/SwetabhSingh17/Madhur_Vedic_Vision',
+    live: null,
+  },
+  {
+    num: '06',
+    title: 'Anima — Apple Ecosystem Calendar',
+    desc: 'Native multiplatform productivity and calendar application engineered for iOS, iPadOS, and macOS. Utilizes Swift and SwiftUI with a modular 3-panel layout, CloudKit synchronization, custom gesture interactions, and tight adherence to Apple Human Interface Guidelines (HIG).',
+    tags: ['Swift', 'SwiftUI', 'iOS', 'iPadOS', 'macOS', 'CloudKit', 'HIG'],
+    type: 'Native iOS / macOS',
+    deployment: 'In Development',
     github: 'https://github.com/SwetabhSingh17',
-    live: '#',
+    live: null,
   },
 ];
 
 const ArrowIcon = () => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="7" y1="17" x2="17" y2="7"/>
-    <polyline points="7 7 17 7 17 17"/>
+    <line x1="7" y1="17" x2="17" y2="7" />
+    <polyline points="7 7 17 7 17 17" />
   </svg>
 );
 
@@ -54,7 +78,7 @@ export default function Projects() {
         <div className="mac-section-label reveal">Work</div>
         <h2 className="mac-section-title reveal">Featured Projects</h2>
         <p className="mac-section-subtitle reveal">
-          A showcase of my work — from full-stack applications to native Apple ecosystem apps.
+          Production systems, AI/ML architectures, and native applications engineered for real-world impact.
         </p>
 
         <div className="row g-4">
@@ -78,7 +102,15 @@ export default function Projects() {
                 {/* Toolbar */}
                 <div className="project-window-toolbar">
                   <span className="project-num" aria-hidden="true">{project.num}</span>
-                  <span className="project-type-badge">{project.type}</span>
+                  <div className="project-badges">
+                    {project.deployment && (
+                      <span className="project-deploy-badge">
+                        <span className="project-deploy-dot" aria-hidden="true" />
+                        {project.deployment}
+                      </span>
+                    )}
+                    <span className="project-type-badge">{project.type}</span>
+                  </div>
                 </div>
 
                 {/* Body */}
@@ -128,3 +160,4 @@ export default function Projects() {
     </section>
   );
 }
+

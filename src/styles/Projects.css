@@ -82,6 +82,7 @@
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
+  gap: 8px;
 }
 
 .project-num {
@@ -90,6 +91,42 @@
   line-height: 1;
   color: var(--text-muted);
   letter-spacing: 0.02em;
+}
+
+.project-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.project-deploy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-primary);
+  background: var(--bg-card);
+}
+
+.project-deploy-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #16a34a;
+  display: inline-block;
+  border: 1px solid var(--mac-black);
+}
+
+[data-theme="dark"] .project-deploy-dot {
+  background-color: #22c55e;
+  border-color: #ffffff;
 }
 
 .project-type-badge {
