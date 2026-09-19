@@ -55,6 +55,11 @@ export default function App() {
 
   return (
     <>
+      {/* CRT Monitor Overlay: Scanlines, Vignette & Electron Beam Sweep */}
+      <div className="crt-overlay" aria-hidden="true">
+        <div className="crt-scan-beam" />
+      </div>
+
       {/* Mac desktop grid background */}
       <div className="mac-desktop" aria-hidden="true" />
 

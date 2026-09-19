@@ -345,16 +345,207 @@ img { max-width: 100%; display: block; }
   color: var(--bg-primary);
 }
 
-/* ===== REVEAL ANIMATION ===== */
+/* ===== CRT MONITOR OVERLAY ===== */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  overflow: hidden;
+}
+
+/* Authentic CRT scanlines */
+.crt-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.18) 50%
+  );
+  background-size: 100% 3px;
+  z-index: 2;
+  opacity: 0.65;
+}
+
+[data-theme="dark"] .crt-overlay::before {
+  background: linear-gradient(
+    rgba(0, 0, 0, 0) 50%, 
+    rgba(0, 0, 0, 0.38) 50%
+  );
+  background-size: 100% 3px;
+  opacity: 0.85;
+}
+
+/* CRT Curved Screen Vignette & Tube Shadow */
+.crt-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.18) 85%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  z-index: 3;
+}
+
+[data-theme="dark"] .crt-overlay::after {
+  background: radial-gradient(
+    circle at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.3) 85%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
+}
+
+/* Electron scan beam sweep */
+.crt-scan-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%
+  );
+  opacity: 0.7;
+  animation: crt-sweep 7s linear infinite;
+  z-index: 4;
+}
+
+[data-theme="dark"] .crt-scan-beam {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 255, 180, 0.04) 50%,
+    transparent 100%
+  );
+}
+
+@keyframes crt-sweep {
+  0% { transform: translateY(-100px); }
+  100% { transform: translateY(100vh); }
+}
+
+/* CRT Screen Power-On sequence on initial load */
+body {
+  animation: crt-power-on 0.55s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes crt-power-on {
+  0% {
+    filter: brightness(0) contrast(2);
+  }
+  30% {
+    filter: brightness(2.8) contrast(1.8);
+  }
+  60% {
+    filter: brightness(0.9) contrast(1.2);
+  }
+  100% {
+    filter: brightness(1) contrast(1);
+  }
+}
+
+/* ===== CRT GLITCH REVEAL (Replaces generic AI fade) ===== */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+  visibility: hidden;
+  will-change: transform, opacity, filter, clip-path;
 }
 
 .reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+  visibility: visible;
+  animation: crt-glitch-in 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes crt-glitch-in {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.02) scaleX(0.8) skewX(20deg);
+    filter: brightness(2.6) contrast(1.8);
+    clip-path: inset(48% 0 48% 0);
+  }
+  15% {
+    opacity: 0.9;
+    transform: scaleY(0.08) scaleX(1.03) skewX(-12deg);
+    filter: brightness(2) contrast(1.5) drop-shadow(-3px 0 #00ffff) drop-shadow(3px 0 #ff0055);
+    clip-path: inset(42% 0 42% 0);
+  }
+  30% {
+    opacity: 0.8;
+    transform: scaleY(1.04) scaleX(0.98) skewX(5deg) translateX(-5px);
+    clip-path: polygon(0 0, 100% 0, 100% 28%, 0 28%, 0 55%, 100% 55%, 100% 100%, 0 100%);
+    filter: brightness(1.5) drop-shadow(3px 0 #00ffff) drop-shadow(-3px 0 #ff0055);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) skewX(-3deg) translateX(3px);
+    clip-path: polygon(0 12%, 100% 12%, 100% 42%, 0 42%, 0 72%, 100% 72%, 100% 100%, 0 100%);
+    filter: brightness(1.2);
+  }
+  70% {
+    opacity: 0.95;
+    transform: scale(1) skewX(1deg) translateX(-2px);
+    clip-path: polygon(0 4%, 100% 4%, 100% 32%, 0 32%, 0 68%, 100% 68%, 100% 96%, 0 96%);
+    filter: drop-shadow(-1px 0 #00ffff) drop-shadow(1px 0 #ff0055);
+  }
+  85% {
+    opacity: 1;
+    transform: scale(1) skewX(-0.5deg) translateX(1px);
+    clip-path: none;
+    filter: none;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) skewX(0) translateX(0);
+    clip-path: none;
+    filter: none;
+  }
+}
+
+/* Glitch Staggering for grid children */
+.row > div:nth-child(2).reveal,
+.row > div:nth-child(2) .reveal { animation-delay: 0.07s; }
+.row > div:nth-child(3).reveal,
+.row > div:nth-child(3) .reveal { animation-delay: 0.14s; }
+.row > div:nth-child(4).reveal,
+.row > div:nth-child(4) .reveal { animation-delay: 0.21s; }
+.row > div:nth-child(5).reveal,
+.row > div:nth-child(5) .reveal { animation-delay: 0.28s; }
+.row > div:nth-child(6).reveal,
+.row > div:nth-child(6) .reveal { animation-delay: 0.35s; }
+
+/* Interactive Retro Text Glitch on Hover */
+.mac-section-title:hover {
+  animation: crt-text-glitch 0.28s steps(2) infinite;
+  text-shadow: -2px 0 #00ffff, 2px 0 #ff0055;
+  cursor: default;
+}
+
+@keyframes crt-text-glitch {
+  0% { transform: translate(0); }
+  25% { transform: translate(-2px, 1px) skewX(2deg); }
+  50% { transform: translate(2px, -1px) skewX(-2deg); }
+  75% { transform: translate(-1px, 2px); }
+  100% { transform: translate(0); }
+}
+
+/* Window Header CRT Bar Pulse on Hover */
+.project-window:hover .project-window-bar,
+.mac-window:hover .mac-window-bar {
+  animation: crt-bar-pulse 0.22s ease-out;
+}
+
+@keyframes crt-bar-pulse {
+  0% { filter: brightness(1.7) drop-shadow(-2px 0 #00ffff); }
+  50% { filter: brightness(0.85) drop-shadow(2px 0 #ff0055); }
+  100% { filter: none; }
 }
 
 /* ===== BOOTSTRAP OVERRIDES ===== */
@@ -375,12 +566,31 @@ img { max-width: 100%; display: block; }
   margin: 40px 0;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE & REDUCED MOTION ===== */
 @media (max-width: 768px) {
   .mac-section {
     padding: 60px 0;
   }
   .mac-section-title {
     font-size: clamp(2.4rem, 10vw, 3.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-scan-beam,
+  body {
+    animation: none !important;
+  }
+  .reveal.visible {
+    animation: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+  .mac-section-title:hover,
+  .project-window:hover .project-window-bar {
+    animation: none !important;
+    text-shadow: none !important;
+    filter: none !important;
   }
 }
