@@ -28,7 +28,7 @@ const projects = [
     tags: ['TypeScript', 'React 18', 'Express', 'PostgreSQL', 'Drizzle ORM', 'LLM / GenAI', 'pdf-parse'],
     type: 'AI / Full Stack',
     deployment: 'SIH 2026 Prototype',
-    github: 'https://github.com/SwetabhSingh17',
+    github: 'https://github.com/SwetabhSingh17/RTFM_SkillOS',
     live: null,
   },
   {
@@ -58,7 +58,7 @@ const projects = [
     tags: ['Swift', 'SwiftUI', 'iOS', 'iPadOS', 'macOS', 'CloudKit', 'HIG'],
     type: 'Native iOS / macOS',
     deployment: 'In Development',
-    github: 'https://github.com/SwetabhSingh17',
+    github: 'https://github.com/SwetabhSingh17/Anima',
     live: null,
   },
 ];
