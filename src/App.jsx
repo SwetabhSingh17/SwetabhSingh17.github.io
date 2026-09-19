@@ -12,8 +12,12 @@ export default function App() {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('portfolio-theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (saved === 'dark' || saved === 'light') return saved;
+      // Device default theme: dark if system prefers dark, otherwise default to white (light)
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+      return 'light';
     }
     return 'light';
   });
@@ -27,8 +31,23 @@ export default function App() {
   };
 
   useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // Listen for device/OS theme changes when no explicit override is set
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleDeviceChange = (e) => {
+      const saved = localStorage.getItem('portfolio-theme');
+      if (!saved) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    };
+    mq.addEventListener('change', handleDeviceChange);
+    return () => mq.removeEventListener('change', handleDeviceChange);
+  }, []);
 
   // Scroll reveal observer
   useEffect(() => {
