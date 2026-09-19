@@ -66,6 +66,12 @@
 
   /* Spacing */
   --navbar-height:    56px;
+
+  /* Glitch & Phosphor Palette (sRGB fallback) */
+  --color-glitch-cyan:    #00ffff;
+  --color-glitch-magenta: #ff0055;
+  --color-phosphor-green: #16a34a;
+  --color-phosphor-glow:  rgba(0, 255, 255, 0.4);
 }
 
 /* ===== DARK MODE TOKENS ===== */
@@ -97,6 +103,57 @@
   --shadow-mac:       4px 4px 0px #F0EEE8;
   --shadow-mac-sm:    2px 2px 0px #F0EEE8;
   --shadow-mac-lg:    6px 6px 0px #F0EEE8;
+
+  --color-phosphor-green: #22c55e;
+  --color-phosphor-glow:  rgba(0, 255, 204, 0.5);
+}
+
+/* ===== WIDE COLOR GAMUT (Display P3) ===== */
+@media (color-gamut: p3) {
+  :root {
+    --color-glitch-cyan:    color(display-p3 0 1 1);
+    --color-glitch-magenta: color(display-p3 1 0 0.45);
+    --color-phosphor-green: color(display-p3 0.15 0.85 0.3);
+  }
+
+  [data-theme="dark"] {
+    --color-phosphor-green: color(display-p3 0.1 0.95 0.35);
+  }
+}
+
+/* ===== HIGH DYNAMIC RANGE (HDR / dynamic-range: high) ===== */
+@media (dynamic-range: high) {
+  :root {
+    --color-glitch-cyan:    color(display-p3 0 1 1);
+    --color-glitch-magenta: color(display-p3 1 0 0.5);
+    --color-phosphor-green: color(display-p3 0.05 1 0.4);
+    --color-phosphor-glow:  color(display-p3 0 1 0.9 / 0.7);
+  }
+
+  /* HDR Peak Luminance & CRT Glow Enhancements */
+  [data-theme="dark"] {
+    --mac-black: color(display-p3 0.98 0.96 0.92);
+  }
+
+  .crt-scan-beam {
+    opacity: 0.85;
+  }
+
+  [data-theme="dark"] .crt-scan-beam {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      color(display-p3 0 1 0.8 / 0.08) 50%,
+      transparent 100%
+    );
+  }
+
+  .mac-section-title:hover {
+    text-shadow:
+      -2.5px 0 var(--color-glitch-cyan),
+      2.5px 0 var(--color-glitch-magenta),
+      0 0 14px color(display-p3 0 1 1 / 0.5);
+  }
 }
 
 /* ===== BASE HTML ===== */
@@ -377,27 +434,27 @@ img { max-width: 100%; display: block; }
   opacity: 0.85;
 }
 
-/* CRT Curved Screen Vignette & Tube Shadow */
+/* CRT 4-Corner Vignette (Top-Left, Top-Right, Bottom-Left, Bottom-Right) */
 .crt-overlay::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at center,
-    transparent 60%,
-    rgba(0, 0, 0, 0.18) 85%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.18) 32%, transparent 65%),
+    radial-gradient(ellipse at 100% 0%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.18) 32%, transparent 65%),
+    radial-gradient(ellipse at 0% 100%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.18) 32%, transparent 65%),
+    radial-gradient(ellipse at 100% 100%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.18) 32%, transparent 65%);
+  background-repeat: no-repeat;
   z-index: 3;
 }
 
 [data-theme="dark"] .crt-overlay::after {
-  background: radial-gradient(
-    circle at center,
-    transparent 55%,
-    rgba(0, 0, 0, 0.3) 85%,
-    rgba(0, 0, 0, 0.75) 100%
-  );
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.38) 35%, transparent 68%),
+    radial-gradient(ellipse at 100% 0%, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.38) 35%, transparent 68%),
+    radial-gradient(ellipse at 0% 100%, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.38) 35%, transparent 68%),
+    radial-gradient(ellipse at 100% 100%, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.38) 35%, transparent 68%);
+  background-repeat: no-repeat;
 }
 
 /* Electron scan beam sweep */
@@ -474,14 +531,14 @@ body {
   15% {
     opacity: 0.9;
     transform: scaleY(0.08) scaleX(1.03) skewX(-12deg);
-    filter: brightness(2) contrast(1.5) drop-shadow(-3px 0 #00ffff) drop-shadow(3px 0 #ff0055);
+    filter: brightness(2) contrast(1.5) drop-shadow(-3px 0 var(--color-glitch-cyan)) drop-shadow(3px 0 var(--color-glitch-magenta));
     clip-path: inset(42% 0 42% 0);
   }
   30% {
     opacity: 0.8;
     transform: scaleY(1.04) scaleX(0.98) skewX(5deg) translateX(-5px);
     clip-path: polygon(0 0, 100% 0, 100% 28%, 0 28%, 0 55%, 100% 55%, 100% 100%, 0 100%);
-    filter: brightness(1.5) drop-shadow(3px 0 #00ffff) drop-shadow(-3px 0 #ff0055);
+    filter: brightness(1.5) drop-shadow(3px 0 var(--color-glitch-cyan)) drop-shadow(-3px 0 var(--color-glitch-magenta));
   }
   50% {
     opacity: 1;
@@ -493,7 +550,7 @@ body {
     opacity: 0.95;
     transform: scale(1) skewX(1deg) translateX(-2px);
     clip-path: polygon(0 4%, 100% 4%, 100% 32%, 0 32%, 0 68%, 100% 68%, 100% 96%, 0 96%);
-    filter: drop-shadow(-1px 0 #00ffff) drop-shadow(1px 0 #ff0055);
+    filter: drop-shadow(-1.5px 0 var(--color-glitch-cyan)) drop-shadow(1.5px 0 var(--color-glitch-magenta));
   }
   85% {
     opacity: 1;
@@ -524,7 +581,7 @@ body {
 /* Interactive Retro Text Glitch on Hover */
 .mac-section-title:hover {
   animation: crt-text-glitch 0.28s steps(2) infinite;
-  text-shadow: -2px 0 #00ffff, 2px 0 #ff0055;
+  text-shadow: -2px 0 var(--color-glitch-cyan), 2px 0 var(--color-glitch-magenta);
   cursor: default;
 }
 
@@ -543,8 +600,8 @@ body {
 }
 
 @keyframes crt-bar-pulse {
-  0% { filter: brightness(1.7) drop-shadow(-2px 0 #00ffff); }
-  50% { filter: brightness(0.85) drop-shadow(2px 0 #ff0055); }
+  0% { filter: brightness(1.7) drop-shadow(-2px 0 var(--color-glitch-cyan)); }
+  50% { filter: brightness(0.85) drop-shadow(2px 0 var(--color-glitch-magenta)); }
   100% { filter: none; }
 }
 

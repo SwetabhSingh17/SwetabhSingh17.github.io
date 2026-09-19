@@ -119,14 +119,16 @@
 .project-deploy-dot {
   width: 6px;
   height: 6px;
-  background-color: #16a34a;
+  background-color: var(--color-phosphor-green, #16a34a);
   display: inline-block;
   border: 1px solid var(--mac-black);
+  box-shadow: 0 0 3px var(--color-phosphor-glow, rgba(0, 255, 204, 0.3));
 }
 
 [data-theme="dark"] .project-deploy-dot {
-  background-color: #22c55e;
+  background-color: var(--color-phosphor-green, #22c55e);
   border-color: #ffffff;
+  box-shadow: 0 0 4px var(--color-phosphor-glow, rgba(0, 255, 204, 0.5));
 }
 
 .project-type-badge {
